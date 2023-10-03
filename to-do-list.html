@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <script type='text/javascript' src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.9/angular.min.js"></script>
+    <script type='text/javascript' src="to-do-list.js"></script>
+    <title>Document</title>
+</head>
+<body ng-app="todoApp" ng-controller="TodoController">
+    <h2>Todo List</h2>
+    <div class="input-group">
+        <input type="text" ng-model="newTodo" placeholder="Add New Tasks" ng-keyup="$event.keyCode == 13 && addTodo()">
+        <span class="input-group-btn">
+            <button class="btn btn-default" type="button" ng-click="addTodo()">Add</button>
+        </span>
+    </div>
+    <ul class="list-group">
+        <li class="list-group-item" ng-repeat="todo in todos">
+            <input type="checkbox" ng-model="todo.complete">
+            <span ng-click="todo.editing=true" ng-hide="todo.editing">{{todo.text}}</span>
+            <input type="text" ng-model="todo.text" ng-blur="updateTodo(todo)" ng-show="todo.editing" ng-focus="todo.editing=true" />
+            <button ng-click="removeTodo($index)">Delete</button>
+        </li>
+    </ul>
+</body>
+</html>
